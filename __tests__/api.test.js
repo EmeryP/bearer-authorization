@@ -18,7 +18,7 @@ process.env.APP_SECRET = 'password';
 
 describe('api', () => {
   
-  xit('should sign up', async () => {
+  it('should sign up', async () => {
 
     const userInfo = {
       username: 'foo',
@@ -29,7 +29,7 @@ describe('api', () => {
     expect(token.text).toBeDefined();
   });
 
-  xit('should sign in with token - bearer auth', async() => {
+  it('should sign in with token - bearer auth', async() => {
     const userInfo = {
       username: 'foofoo',
       password: 'bar',
@@ -50,10 +50,10 @@ describe('api', () => {
     };
     
     let response = await mockRequest.post('/signup').send(userInfo);
-    console.log(response.text);
-
+    
     const token = response;
-    response = await mockRequest.post('/signin').auth(token, {type:'bearer'});
+    response = await mockRequest.post('/signin').auth(token, {type:'basic'});
+    console.log(response.body);
 
     // expect(response.text).toBe('dunno');
   });
