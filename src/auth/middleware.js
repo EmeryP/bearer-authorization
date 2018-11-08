@@ -1,16 +1,15 @@
 'use strict';
 
 import User from './model.js';
-import { request } from 'https';
 
 export default (capability) => {
 
-  return (req, res, next) => {
+  return (request, response, next) => {
 
     try {
-      console.log('auth header', req.header.authorization);
+      console.log('auth header', request.headers.authorization);
 
-      let [authType, authString] = req.headers.authorization.split(/\s+/);
+      let [authType, authString] = request.headers.authorization.split(/\s+/);
 
       console.log('auth info', authType, authString);
 

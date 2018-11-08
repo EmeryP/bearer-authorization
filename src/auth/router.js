@@ -7,12 +7,12 @@ import auth from './middleware.js';
 
 
 authRouter.post('/signup', (request, response, next) => {
-  let user = new User(req.body);
+  let user = new User(request.body);
   user.save()
     .then((user) => {
       request.token = user.generateToken();
       request.user = user;
-      response.send(req.token);
+      response.send(request.token);
     }).catch(next);
 });
 

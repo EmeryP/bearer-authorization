@@ -14,33 +14,37 @@ beforeEach(async () => {
   await User.deleteMany({});
 });
 
+process.env.APP_SECRET = 'password';
+
 describe('api', () => {
   
-  it('should sign up', async () => {
+  xit('should sign up', async () => {
 
     const userInfo = {
       username: 'foo',
       password: 'bar',
+      email: 'foo@bar.com',
     };
-    
     const token = await mockRequest.post('/signup').send(userInfo);
-
-    expect(token).toBeDefined();
+    expect(token.text).toBeDefined();
   });
 
-  xit('should sign in with token', async() => {
+  it('should sign in with token', async() => {
     const userInfo = {
-      username: 'foo',
+      username: 'foofoo',
       password: 'bar',
+      email: 'foo@bar.com',
     };
     
     let response = await mockRequest.post('/signup').send(userInfo);
-
-    const token = response.body.token;
+    const token = response.text;
+    console.log(token);
 
     response = await mockRequest.post('/signin').auth(token, {type:'bearer'});
+    console.log(response.text);
+    
 
-    expect(response.text).toBe('how to test a valid token???');
+    // expect(response.text).toBe('how to test a valid token???');
   });
 
   xit('should sign in with username/password', async() => {
