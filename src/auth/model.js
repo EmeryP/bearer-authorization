@@ -36,7 +36,7 @@ schema.statics.authenticateBasic = function (auth) {
 };
 
 schema.statics.authenticateToken = function (token) {
-  let parsedToken = jwt.verify(token, process.env.SECRET);
+  let parsedToken = jwt.verify(token, process.env.APP_SECRET);
   let query = { _id: parsedToken.id };
   return this.findOne(query)
     .then(user => {
