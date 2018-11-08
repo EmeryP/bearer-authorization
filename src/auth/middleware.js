@@ -1,22 +1,18 @@
 'use strict';
 
 import User from './model.js';
+import { request } from 'https';
 
 export default (capability) => {
 
-  //*
   return (req, res, next) => {
 
     try {
-
-      console.log('auth header', req.headers.authorization);
+      console.log('auth header', req.header.authorization);
 
       let [authType, authString] = req.headers.authorization.split(/\s+/);
 
       console.log('auth info', authType, authString);
-
-      // BASIC Auth  ... Authorization:Basic ZnJlZDpzYW1wbGU=
-      // BEARER Auth ... Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI
 
       switch (authType.toLowerCase()) {
       case 'basic':
@@ -32,14 +28,13 @@ export default (capability) => {
     }
 
     function _authBasic(authString) {
-      let base64Buffer = Buffer.from(authString, 'base64'); // <Buffer 01 02...>
-      let bufferString = base64Buffer.toString(); // john:mysecret
-      let [username, password] = bufferString.split(':'); // variables username="john" and password="mysecret"
+      let base64Buffer = Buffer.from(authString, 'base64');
+      let bufferString = base64Buffer.toString();
+      let [username, password] = bufferString.split(':');
       let auth = {
         username,
         password,
-      }; // {username:"john", password:"mysecret"}
-
+      };
       console.log('user info', auth);
 
       return User.authenticateBasic(auth)
@@ -48,27 +43,25 @@ export default (capability) => {
 
     function _authBearer(authString) {
       return User.authenticateToken(authString)
-        .then(user => _authenticate(user));
+        .then(user => _authenticate(user)); 
     }
 
-    function _authenticate(user) {
-      if (user && (!capability || (user.can(capability)))) {
-        req.user = user;
-        req.token = user.generateToken();
+    function _authenticate(user){
+      if(user && (!capability || (user.can(capability)))){
+        request.user = user;
+        request.token = user.generateToken();
         next();
       } else {
         _authError();
       }
     }
-
-    function _authError() {
+    function _authError(){
       next({
-        status: 401,
-        statusMessage: 'Unauthorized',
+        status:401,
+        statusMessage: 'Unathorized',
         message: 'Invalid User ID/Password',
       });
     }
-
   };
-  //*/
 };
+
