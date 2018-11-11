@@ -7,11 +7,11 @@ export default (capability) => {
   return (request, response, next) => {
 
     try {
-      console.log('auth header', request.headers.authorization);
+      // console.log('auth header', request.headers.authorization);
 
       let [authType, authString] = request.headers.authorization.split(/\s+/);
 
-      console.log('auth info', authType, authString);
+      // console.log('auth info', authType, authString);
 
       switch (authType.toLowerCase()) {
       case 'basic':
@@ -34,7 +34,7 @@ export default (capability) => {
         username,
         password,
       };
-      console.log('user info', auth);
+      // console.log('user info', auth);
 
       return User.authenticateBasic(auth)
         .then(user => _authenticate(user));

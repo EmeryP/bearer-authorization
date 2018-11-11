@@ -48,12 +48,11 @@ describe('api', () => {
       password: 'bar',
       email: 'foo@bar.com',
     };
-    
+
     let response = await mockRequest.post('/signup').send(userInfo);
-    
-    const token = response;
+    const token = response.text;
+    console.log(token);
     response = await mockRequest.post('/signin').auth(token, {type:'basic'});
-    console.log(response.body);
 
     // expect(response.text).toBe('dunno');
   });
