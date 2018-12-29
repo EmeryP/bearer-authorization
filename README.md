@@ -1,7 +1,7 @@
 # Basic and Bearer Authorization
 Added basic and bearer authentication/authorization functionality to a CRUD API.
 
-## Setup and Testing
+## Getting Started
 1) Fork and clone this repository to your local machine
 2) Navigate to the root directory where the `index.js` is located
 3) From your cmd line run `npm i`
