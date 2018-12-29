@@ -1,11 +1,8 @@
 # Basic and Bearer Authorization
-Basic and Bearer authorization practice
-
-## Challenge
-* Add basic and bearer authentication/authorization functionality to a CRUD api.
+Added basic and bearer authentication/authorization functionality to a CRUD API.
 
 ## Setup and Testing
-1) Fork and download this repository to your local machine
+1) Fork and clone this repository to your local machine
 2) Navigate to the root directory where the `index.js` is located
 3) From your cmd line run `npm i`
 4) In the `root` directory, run `mongod --dbpath=./data` from your command line and this will fire up the mongo database.
@@ -20,5 +17,5 @@ Basic and Bearer authorization practice
 2) Using Postman to signin with basic auth, send a `POST` request to the following URL `http://localhost:3000/signin` with the password and username from above.
 3) Using Postman to signin with bearer auth, send a `POST` request to the following URL `http://localhost:3000/signin` and use the token that was returned from the `signup` post completed in line 1. 
 
-## Credits
+### Credits
 Codefellows demo code
