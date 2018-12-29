@@ -18,4 +18,4 @@ Added basic and bearer authentication/authorization functionality to a CRUD API.
 3) Using Postman to signin with bearer auth, send a `POST` request to the following URL `http://localhost:3000/signin` and use the token that was returned from the `signup` post completed in line 1. 
 
 ### Credits
-Codefellows demo code
+Code Fellows demo code
